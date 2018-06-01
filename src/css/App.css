@@ -1,0 +1,46 @@
+.header {
+	height: 70px;
+	background-color: #000;
+	text-align: center;
+	color: #FFF;
+	padding: 0;
+}
+
+.navmenu {
+	margin: auto;
+	height: 100%;
+}
+.navmenu ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 25px;
+	height: 100%;
+}
+.navmenu ul li {
+	display: inline;
+	margin-right: 25px;
+	height: 100%;
+}
+.navmenu ul li a{
+	text-decoration: none;
+	color: #FFF;
+	height: 100%;
+}
+
+.income_distribution {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.no_data {
+	display: flex;
+	border: 1px solid #000;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+
+
