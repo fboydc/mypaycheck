@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import api from '../api';
-import FontAwesome from 'react-fontawesome';
+import FaPaperPlane from 'react-icons/lib/fa/paper-plane-o';
+import { Link } from 'react-router-dom';
 
 
 export default class Dashboard extends Component {
@@ -8,7 +9,6 @@ export default class Dashboard extends Component {
 
 
 	render(){
-		console.log(FontAwesome);
 
 		if(api.getBoxes()){
 			return (
@@ -20,8 +20,9 @@ export default class Dashboard extends Component {
 		}else{
 			return (
 				<section className="no_data col-offset-3 col-6">
+					<p className="icon"><FaPaperPlane /></p>
 					<p>NO PARAMETERS SET. CLICK HERE TO START:</p>
-
+					<Link to="/parameters" className="link_btn">PARAMETERS</Link>
 				</section>
 			)
 		}

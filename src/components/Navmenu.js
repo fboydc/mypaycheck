@@ -10,7 +10,7 @@ export default class Navmenu extends Component{
 					<ul>
 						<li><Link to="/">DASHBOARD</Link></li>
 						<li><Link to="/cashflow">CASHFLOW PLAN</Link></li>
-						<li>PARAMETERS</li>
+						<li><Link to="/parameters">PARAMETERS</Link></li>
 					</ul>
 				</nav>
 			</header>

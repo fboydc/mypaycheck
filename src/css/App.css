@@ -42,5 +42,61 @@
 
 }
 
+.icon {
+	font-size: 5em;
+	margin: 0;
+}
+
+.link_btn {
+	display: block;
+	padding: 25px;
+	background-color: blue;
+	text-align: center;
+	text-decoration: none;
+	color: #FFF;
+	border-radius: 5px;
+	margin-bottom: 30px;
+}
+
+.income-form-container {
+	margin-top: 100px;
+	display: flex;
+	justify-content: center;
+	padding: 25px;
+}
+
+.income-form {
+	width: 100%;
+	display: flex;
+	padding: 25px;
+	flex-direction: column;
+	align-items: center;
+
+}
+
+
+.income-form-item {
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 25px;
+	align-items: center;
+}
+
+.income-form-item label {
+	width: 30%;
+}
+
+
+
+
+
+
+.income-form-item input {
+	width: 70%;
+	height: 30px;
+	border-radius: 2px;
+	border: 1px solid #000;
+}
 
 
