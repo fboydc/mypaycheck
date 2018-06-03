@@ -39,6 +39,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	height: 500px;
 
 }
 
@@ -50,7 +51,7 @@
 .link_btn {
 	display: block;
 	padding: 25px;
-	background-color: blue;
+	background-color: #2699FB;
 	text-align: center;
 	text-decoration: none;
 	color: #FFF;
@@ -59,19 +60,48 @@
 }
 
 .income-form-container {
-	margin-top: 100px;
+	margin-top: 60px;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 	padding: 25px;
+	text-align: center;
+	border: 1px solid #000;
+	border-radius: 5px;
 }
 
 .income-form {
-	width: 100%;
+	width: 70%;
 	display: flex;
 	padding: 25px;
 	flex-direction: column;
 	align-items: center;
 
+}
+
+.income-form-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.income-form-header h2 {
+	margin-right: 25px;
+}
+
+.lock {
+	padding: 10px;
+	background-color: #2699FB;
+	border: 1px solid #2699FB;
+	color: #FFF;
+	cursor: pointer;
+	font-size: 1em;
+}
+
+.lock:active {
+	background-color: #509ee2;
+	transform: translateY(4px);
+	box-shadow: 0 2px #666;
 }
 
 
@@ -97,6 +127,58 @@
 	height: 30px;
 	border-radius: 2px;
 	border: 1px solid #000;
+}
+
+.income-form-item select {
+	width: 70%;
+	height: 30px;
+	border-radius: 2px;
+	border: 1px solid #000;
+}
+.button-container {
+	display: flex;
+}
+
+
+.button {
+	margin-right: 15px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+	background-color: #2699FB;
+	border: 1px solid #2699FB;
+	color: #FFF;
+	cursor: pointer;
+}
+
+.button:last-child {
+	margin-right: 0px;
+}
+
+.button:active {
+	background-color: #509ee2;
+	transform: translateY(4px);
+	box-shadow: 0 2px #666;
+}
+
+.clear-button {
+	background-color: #FB8826;
+	border: 1px solid #FB8826;
+}
+
+.clear-button:active {
+	background-color:#DC7721;
+	transform: translateY(4px);
+	box-shadow: 0 2px #666;
+}
+
+.locked {
+	background-color: #EBEBEE;
+}
+
+.locked .button {
+	display: none;
 }
 
 
