@@ -7,6 +7,7 @@ import { createStore, compose, applyMiddleware} from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import 'react-notifications/lib/notifications.css';
 
 const logger = store => next => action =>{
 	console.group(action.type);

@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import FaLock from 'react-icons/lib/fa/lock';
 import FaUnlockAlt from 'react-icons/lib/fa/unlock-alt';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import ReactLoading from 'react-loading';
+
+
 
 
 export default class IncomeDetails extends Component {
@@ -12,7 +16,8 @@ export default class IncomeDetails extends Component {
 			frequency: 'biweekly',
 			state: 'florida',
 			city: 'miami',
-			locked: false
+			locked: true,
+			loading: false
 		}
 	}
 
@@ -37,9 +42,27 @@ export default class IncomeDetails extends Component {
 		this.setState({locked: !this.state.locked})
 	}
 
-	render(){
+	saveIncomeDetail = () => {
+		this.setState({loading:true});
+		setTimeout(()=>{
+			this.setState({loading:false});
+			this.toggleLock();
+			NotificationManager.success('This is a message');
+		}, 1000);
+		
+		
+	}
 
-		if(this.state.locked){
+	render(){
+		if(this.state.loading){
+			return(
+					<div className="col-offset-3 col-6 income-form-container loading">
+						Saving Changes...
+						<ReactLoading type={"spin"} color={"#000"}/>
+					</div>
+				)
+			
+		}else if(this.state.locked){
 			return(
 					<div className="col-offset-3 col-6 income-form-container locked">
 						<div className="income-form-header">
@@ -49,7 +72,7 @@ export default class IncomeDetails extends Component {
 						<div className="income-form">
 							<div className="income-form-item">
 								<label>Annual Salary:</label>
-								<input type="number" disabled/>
+								<input type="number" disabled className="input"/>
 							</div>
 							<div className="income-form-item">
 								<label>Filing Status:</label>
@@ -67,11 +90,11 @@ export default class IncomeDetails extends Component {
 							</div>
 							<div className="income-form-item">
 								<label>Federal Allowances</label>
-								<input type="number" min="0" step="1" disabled/>
+								<input type="number" min="0" step="1" disabled className="input"/>
 							</div>
 							<div className="income-form-item">
 								<label>Pre-tax deductions:</label>
-								<input type="number" disabled/>
+								<input type="number" disabled className="input"/>
 							</div>
 							<div className="income-form-item">
 								<label>State</label>
@@ -93,7 +116,7 @@ export default class IncomeDetails extends Component {
 									Clear
 								</button>
 							</div>
-							
+							<NotificationContainer/>
 						</div>
 					</div>
 				)
@@ -108,7 +131,7 @@ export default class IncomeDetails extends Component {
 					<div className="income-form">
 						<div className="income-form-item">
 							<label>Annual Salary:</label>
-							<input type="number"/>
+							<input type="number" className="input"/>
 						</div>
 						<div className="income-form-item">
 							<label>Filing Status:</label>
@@ -126,11 +149,11 @@ export default class IncomeDetails extends Component {
 						</div>
 						<div className="income-form-item">
 							<label>Federal Allowances</label>
-							<input type="number" min="0" step="1"/>
+							<input type="number" min="0" step="1" className="input"/>
 						</div>
 						<div className="income-form-item">
 							<label>Pre-tax deductions:</label>
-							<input type="number"/>
+							<input type="number" className="input"/>
 						</div>
 						<div className="income-form-item">
 							<label>State</label>
@@ -145,14 +168,14 @@ export default class IncomeDetails extends Component {
 							</select>
 						</div>
 						<div className="button-container">
-							<button className="button">
+							<button className="button" onClick={this.saveIncomeDetail}>
 								Save
 							</button>
 							<button className="button clear-button">
 								Clear
 							</button>
 						</div>
-						
+						<NotificationContainer/>
 					</div>
 				</div>
 				)

@@ -25,14 +25,28 @@ const incomeDetails = (state={}, action) => {
 	}
 }
 
-const boxes = (state={}, action) => {
+const boxes = (state={boxes:[]}, action) => {
 	switch(action.type){
 		case GET_BOXES:
 			const {boxes} = action;
+			console.log("boxes", boxes);
 			return {
 				...state,
-				boxes: boxes
+				boxes: [...boxes]
 			}
+		case ADD_BOX: 
+			const {name, items} = action;
+			return {
+				...state,
+				boxes: [
+					...state.boxes,
+					{
+						name: name,
+						items: items
+					}
+				]
+			}
+
 		default:
 			return state;
 	}

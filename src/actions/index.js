@@ -33,14 +33,15 @@ export const getIncomeDetails = ({annualIncome, payFrequency}) => {
 }
 
 
-export const addBox = ({name}) => {
+export const addBox = ({name, items}) => {
 	return {
 		type: ADD_BOX,
-		name
+		name,
+		items
 	}
 }
 
-export const getBoxes = ({boxes})=>{
+export const getBoxes = (boxes)=>{
 	return {
 		type: GET_BOXES,
 		boxes
