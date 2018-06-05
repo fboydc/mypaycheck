@@ -10,42 +10,45 @@ import {
 	EDIT_BOX_ITEM
 } from '../actions'
 
-const incomeDetails = (state={}, action) => {
+const incomeDetails = (state = {}, action) => {
 	switch(action.type){
-		case GET_INCOME_DETAILS:
-			//const { income } = action;
+		case GET_INCOME_DETAILS:{
+			const { annualIncome, filingStatus, payFrequency, federalAllowances, pretaxDeductions, state, city } = action;
 			return {
-				...state,
-				incomeDetails: {
-					...action.incomeDetails
-				}
+					annualIncome: annualIncome,
+					filingStatus: filingStatus,
+					payFrequency: payFrequency,
+					federalAllowances: federalAllowances,
+					pretaxDeductions: pretaxDeductions,
+					state: state,
+					city: city
 			}
+		}
 		default:
 			return state;
 	}
 }
 
-const boxes = (state={boxes:[]}, action) => {
+const boxes = (state = [], action) => {
+
 	switch(action.type){
-		case GET_BOXES:
-			const {boxes} = action;
-			console.log("boxes", boxes);
-			return {
-				...state,
-				boxes: [...boxes]
-			}
-		case ADD_BOX: 
+		case ADD_BOX:{
 			const {name, items} = action;
-			return {
-				...state,
-				boxes: [
-					...state.boxes,
-					{
-						name: name,
-						items: items
+			return [
+					...state,
+						{
+							name: name,
+							items: items
+						}
+
+					]
+		}
+		case GET_BOXES:{
+					if(action.boxes){
+						return [...action.boxes]
 					}
-				]
-			}
+					return state
+				}
 
 		default:
 			return state;

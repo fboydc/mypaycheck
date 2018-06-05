@@ -1,39 +1,30 @@
 import React, {Component} from 'react';
 import api from '../api';
+import ConfigBox  from './ConfigBox';
 import {connect} from 'react-redux';
 import {getBoxes} from '../actions';
 
 
-class ConfigBoxes extends Component {
+export default class ConfigBoxes extends Component {
 
-	componentDidMount(){
-		//api.deleteAllBoxes();
-		const boxes = api.getBoxes();
-		console.log(boxes);
-		this.props.getBoxes(api.getBoxes());
-	}
+
 
 
 	render(){
-		return (	
-			<div className="col=offset-3 col-6">
-				
+		const {boxes} = this.props;
+
+		return (
+			<div className="col-12 config_boxes_container">
+				<div className="row buttons_container">
+					<button className="button">delete all</button><button className="button">add</button>
+				</div>
+				<div className="row boxes_content">
+					{ boxes.map((box)=>(<ConfigBox name={box.name} key={box.name} items={box.items}/>)) }
+				</div>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = (state)=>{
-	return {
-		boxes: state.boxes
-	}
-}
 
-const mapDispatchToProps = (dispatch)=> {
-	return {
-		getBoxes: (boxes)=>dispatch(getBoxes(boxes))
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfigBoxes);
 

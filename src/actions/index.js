@@ -12,23 +12,29 @@ export const EDIT_BOX_ITEM = 'EDIT_BOX_ITEM'
 
 
 
-export const addIncomeDetails = ({annualIncome, filingStatus, payFrequency, federalAllownaces, pretaxDeductions, state, city}) => {
+export const addIncomeDetails = ({annualIncome, filingStatus, payFrequency, federalAllowances, pretaxDeductions, state, city}) => {
 	return {
 		type: ADD_INCOME_DETAILS,
 		annualIncome,
 		filingStatus,
 		payFrequency,
-		federalAllownaces,
+		federalAllowances,
 		pretaxDeductions,
 		state,
 		city
 	}
 }
 
-export const getIncomeDetails = ({annualIncome, payFrequency}) => {
+export const getIncomeDetails = ({annualIncome, filingStatus, payFrequency, federalAllowances, pretaxDeductions, state, city}) => {
 	return {
 		type: GET_INCOME_DETAILS,
-		payFrequency
+		annualIncome,
+		filingStatus,
+		payFrequency,
+		federalAllowances,
+		pretaxDeductions,
+		state,
+		city
 	}
 }
 

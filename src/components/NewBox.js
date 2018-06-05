@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import ReactLoading from 'react-loading';
+import {addBox} from '../actions';
 import api from '../api';
+import {connect} from 'react-redux';
 
 
-export default class NewBox extends Component {
+class NewBox extends Component {
 
 	constructor(){
 		super();
@@ -18,8 +20,8 @@ export default class NewBox extends Component {
 	}
 
 	createBox = ()=>{
-		console.log('here');
-		api.createBox(this.state.boxName);
+		const box = api.createBox(this.state.boxName)
+		this.props.createBox(box);
 	}
 
 
@@ -39,3 +41,20 @@ export default class NewBox extends Component {
 		)
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		boxes: state.boxes.entries
+	}
+}
+
+
+
+const mapDispatchToProps = (dispatch)=> {
+	return {
+		createBox: (box) => dispatch(addBox(box))
+	}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewBox)

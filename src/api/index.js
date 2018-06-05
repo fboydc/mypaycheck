@@ -1,24 +1,30 @@
 const getIncomeDetails = () => {
-	return localStorage.getItem('incomeDetails');
+	return JSON.parse(localStorage.getItem('incomeDetails'));
 }
 
 const getBoxes = () => {
 	return JSON.parse(localStorage.getItem('boxes'));
 }
 
+const addIncomeDetails = (details) => {
+	localStorage.setItem('incomeDetails', JSON.stringify(details));
+}
 
 const createBox = (name) =>{
-	//console.log(name);
-	const boxes = localStorage.getItem('boxes');
-	//console.log(boxes);
+
+	let boxes = JSON.parse(localStorage.getItem('boxes'));
+
+	const newBox = {name: name, items:[]}
 	if(boxes){
-		const boxes = [...boxes, {name: name, items: []}]
-		return localStorage.setItem('boxes', JSON.stringify(boxes));
+		boxes = [...boxes, newBox];
+		localStorage.setItem('boxes', JSON.stringify(boxes));
 	}else{
-		const boxes = [{name: name, items: []}] 
-		return localStorage.setItem('boxes', JSON.stringify(boxes));
+		const boxes = [newBox]
+		localStorage.setItem('boxes', JSON.stringify(boxes));
 	}
-	
+
+	return newBox;
+
 }
 
 const deleteAllBoxes = () => {
@@ -26,4 +32,4 @@ const deleteAllBoxes = () => {
 }
 
 
-export default { getBoxes, getIncomeDetails, createBox, deleteAllBoxes}
+export default { getBoxes, getIncomeDetails, createBox, deleteAllBoxes, addIncomeDetails}
