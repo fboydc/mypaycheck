@@ -13,7 +13,6 @@ class IncomeDetails extends Component {
 
 	constructor(props){
 		super(props)
-		console.log("this.props", this.props.incomeDetails);
 		this.state = {
 			annualIncome: 0,
 			federalAllowances: 0,
@@ -26,21 +25,31 @@ class IncomeDetails extends Component {
 		}
 	}
 
-
-
 	componentDidMount(){
 
-		const details = api.getIncomeDetails();
-
-		if(details){
-			this.resetForm(details);
+		if(Object.keys(this.props.incomeDetails).length !== 0){
+			const {annualIncome, federalAllowances, pretaxDeductions, filingStatus, frequency, state, city } = this.props.incomeDetails;
+			this.setState({annualIncome: annualIncome, federalAllowances:federalAllowances, pretaxDeductions: pretaxDeductions, filingStatus: filingStatus, frequency: frequency, state: state, city:city});
 		}
-		return
+
+
+
 
 	}
 
+	componentWillReceiveProps(nextProps){
+		if(JSON.stringify(this.props.incomeDetails) !== JSON.stringify(nextProps.incomeDetails)){
+			const {annualIncome, federalAllowances, pretaxDeductions, filingStatus, frequency, state, city} = nextProps.incomeDetails;
+			this.setState({annualIncome: annualIncome, federalAllowances:federalAllowances, pretaxDeductions: pretaxDeductions, filingStatus: filingStatus, frequency: frequency, state: state, city:city})
+		}
+
+
+	}
+
+
+
 	resetForm = ({annualIncome, federalAllowances, pretaxDeductions, filingStatus, frequency, state, city })=>{
-		this.setState({annualIncome: annualIncome, federalAllowances:federalAllowances, filingStatus: filingStatus, frequency: frequency, state: state, city:city});
+		this.setState({annualIncome: annualIncome, federalAllowances:federalAllowances, pretaxDeductions: pretaxDeductions, filingStatus: filingStatus, frequency: frequency, state: state, city:city});
 	}
 
 
@@ -61,7 +70,12 @@ class IncomeDetails extends Component {
 	}
 
 	toggleLock = () => {
-		this.resetForm(api.getIncomeDetails());
+		const details = api.getIncomeDetails();
+
+		if(details)
+			this.resetForm(details);
+		else
+			this.resetForm({annualIncome: 0, federalAllowances: 0, pretaxDeductions: 0, filingStatus: 'single', frequency: 'biweekly', state: 'florida', city: 'miami'})
 		this.setState({locked: !this.state.locked})
 	}
 
@@ -72,7 +86,14 @@ class IncomeDetails extends Component {
 
 
 		//const { salary, federalAllowances, pretaxDeductions, filingStatus, frequency, state, city } = this.state;
+
+		if(this.state.annualIncome === ''|| this.state.federalAllowances === '' || this.state.pretaxDeductions === ''){
+			NotificationManager.error('one or more fields are empty');
+			return;
+		}
+
 		const details = {annualIncome: this.state.annualIncome, federalAllowances: this.state.federalAllowances, pretaxDeductions: this.state.pretaxDeductions, filingStatus: this.state.filingStatus, frequency: this.state.frequency, state: this.state.state, city: this.state.city}
+
 		//console.log("salary", salary);
 		this.props.loadSpinner();
 		api.addIncomeDetails(details);
@@ -80,7 +101,7 @@ class IncomeDetails extends Component {
 		setTimeout(()=>{
 			this.props.loadSpinner();
 			this.toggleLock();
-			NotificationManager.success('This is a message');
+			NotificationManager.success('Income details saved.');
 		}, 1000);
 
 
@@ -105,46 +126,46 @@ class IncomeDetails extends Component {
 
 
 			return(
-					<div className="col-offset-3 col-6 income-form-container locked">
+					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 col-offset-xs-1 col-xs-10 income-form-container locked">
 						<div className="income-form-header">
 							<h2>Income Details</h2>
 							<button className="lock" onClick={this.toggleLock}><FaLock /></button>
 						</div>
 						<div className="income-form">
 							<div className="income-form-item">
-								<label>Annual Salary:</label>
+								<p>Annual Salary:</p>
 								<input type="number" disabled className="input" value={this.state.annualIncome}/>
 							</div>
 							<div className="income-form-item">
-								<label>Filing Status:</label>
+								<p>Filing Status:</p>
 								<select value={this.state.filingStatus} disabled>
 									<option value="single">single</option>
 									<option value="jointly">married, filing jointly</option>
 								</select>
 							</div>
 							<div className="income-form-item">
-								<label>Pay Frequency:</label>
+								<p>Pay Frequency:</p>
 								<select value={this.state.frequency}  ref={(input)=>{this.frequency = input}} disabled>
 									<option value="biweekly">biweekly</option>
 									<option value="monthly">monthly</option>
 								</select>
 							</div>
 							<div className="income-form-item">
-								<label>Federal Allowances</label>
+								<p>Federal Allowances</p>
 								<input type="number" min="0" step="1" disabled className="input" value={this.state.federalAllowances}/>
 							</div>
 							<div className="income-form-item">
-								<label>Pre-tax deductions:</label>
+								<p>Pre-tax deductions:</p>
 								<input type="number" disabled className="input" value={this.state.pretaxDeductions}/>
 							</div>
 							<div className="income-form-item">
-								<label>State</label>
+								<p>State</p>
 								<select value={this.state.currentState}  ref={(input)=>{this.currentState = input}} disabled>
 									<option value="florida">FL</option>
 								</select>
 							</div>
 							<div className="income-form-item">
-								<label>City</label>
+								<p>City</p>
 								<select value={this.state.city}  ref={(input)=>{this.city = input}} disabled>
 									<option value="miami">MIA</option>
 								</select>
@@ -164,51 +185,51 @@ class IncomeDetails extends Component {
 
 		}else{
 			return(
-				<div className="col-offset-3 col-6 income-form-container">
+				<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 col-offset-xs-1 col-xs-10 income-form-container">
 					<div className="income-form-header">
 						<h2>Income Details</h2>
 						<button className="lock" onClick={this.toggleLock}><FaUnlockAlt /></button>
 					</div>
 					<div className="income-form">
 						<div className="income-form-item">
-							<label>Annual Salary:</label>
+							<p>Annual Salary:</p>
 							<input type="number" className="input" ref={(input)=>{this.salary = input}} value={this.state.annualIncome} onChange={this.handleSalaryInput}/>
 						</div>
 						<div className="income-form-item">
-							<label>Filing Status:</label>
+							<p>Filing Status:</p>
 							<select value={this.state.filingStatus} onChange={this.handleStatusChange} ref={(input)=>{this.filingStatus = input}}>
 								<option value="single">single</option>
 								<option value="jointly">married, filing jointly</option>
 							</select>
 						</div>
 						<div className="income-form-item">
-							<label>Pay Frequency:</label>
+							<p>Pay Frequency:</p>
 							<select value={this.state.frequency} onChange={this.handleFrequencyChange} ref={(input)=>{this.frequency = input}}>
 								<option value="biweekly">biweekly</option>
 								<option value="monthly">monthly</option>
 							</select>
 						</div>
 						<div className="income-form-item">
-							<label>Federal Allowances</label>
+							<p>Federal Allowances</p>
 							<input type="number" min="0" step="1" className="input" ref={(input)=>{this.fed = input}} value={this.state.federalAllowances} onChange={this.handleFedInput}/>
 						</div>
 						<div className="income-form-item">
-							<label>Pre-tax deductions:</label>
+							<p>Pre-tax deductions:</p>
 							<input type="number" className="input" value={this.state.pretaxDeductions} ref={(input)=>{this.pretax = input}} onChange={this.handlePretaxChange}/>
 						</div>
 						<div className="income-form-item">
-							<label>State</label>
+							<p>State</p>
 							<select value={this.state.currentState} onChange={this.handleStateChange} ref={(input)=>{this.currentState = input}}>
 								<option value="florida">FL</option>
 							</select>
 						</div>
 						<div className="income-form-item">
-							<label>City</label>
+							<p>City</p>
 							<select value={this.state.city} onChange={this.handleCityChange} ref={(input)=>{this.city = input}}>
 								<option value="miami">MIA</option>
 							</select>
 						</div>
-						<div className="button-container">
+						<div className="buttons_container">
 							<button className="button" onClick={this.saveIncomeDetail}>
 								Save
 							</button>

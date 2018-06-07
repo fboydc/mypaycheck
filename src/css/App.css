@@ -59,13 +59,16 @@
 	margin-bottom: 30px;
 }
 
+
+.title {
+	text-align: center;
+}
 .income-form-container {
 	margin-top: 60px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 25px;
-	text-align: center;
 	border: 1px solid #000;
 	border-radius: 5px;
 }
@@ -80,6 +83,7 @@
 }
 
 .income-form-header {
+		text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -107,14 +111,10 @@
 
 .income-form-item {
 	width: 80%;
-	display: flex;
-	justify-content: center;
-	margin-bottom: 25px;
-	align-items: center;
 }
 
 .income-form-item label {
-	width: 30%;
+	width: 100%;
 }
 
 
@@ -123,14 +123,14 @@
 
 
 .input {
-	width: 70%;
+	width: 100%;
 	height: 30px;
 	border-radius: 2px;
 	border: 1px solid #000;
 }
 
 .income-form-item select {
-	width: 70%;
+	width: 100%;
 	height: 30px;
 	border-radius: 2px;
 	border: 1px solid #000;
@@ -240,9 +240,7 @@
 
 .buttons_container {
 	justify-content: center;
-	border: 1px solid #000;
 	padding: 10px;
-	border-radius: 5px;
 }
 
 .config_boxes_container {
@@ -279,7 +277,19 @@
 
 }
 
+.config_box_button_inverse {
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #2699FB;
+	border: 1px solid #FFF;
+	font-size: 1em;
+}
+
 .config_box_button:hover {
+	cursor: pointer;
+}
+
+.config_box_button_inverse:hover {
 	cursor: pointer;
 }
 
@@ -288,15 +298,15 @@
 }
 
 .config-box-header {
+	margin: 0;
 	padding: 10px;
 	background-color: #2699FB;
-	justify-content: space-around;
 }
 
 .boxes_content {
 	flex-wrap: wrap;
 	border: 1px solid #000;
-	padding: 30px;
+	padding: 20px;
 	justify-content: space-around;
 }
 
@@ -313,8 +323,9 @@
 }
 
 .box-content {
-	padding: 10px;
+	flex-direction: column;
 	color: #000;
+	margin: 0;
 }
 
 .loading {
@@ -322,5 +333,93 @@
 	margin: auto;
 	right: 0;
 	margin: 20px;
+}
+
+.boxitem_item {
+	margin-bottom: 0;
+	align-items: center;
+
+}
+
+
+/********************** MODAL ***********************/
+
+.modal {
+ 	position: absolute;
+ 	min-width: 350px;
+ 	max-width: 500px;
+ 	background-color: #FFF;
+ 	border: 1px solid #000;
+ 	text-align: center;
+}
+
+.modal-close-button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal-input-row {
+	width: 100%;
+	padding-right: 0px;
+}
+
+.modal-button-container {
+	justify-content: center;
+}
+
+
+
+.modal-label {
+	width: 100%;
+	display: flex;
+	margin-bottom: 10px;
+
+}
+
+.modal-label label {
+	margin-right: 25px;
+}
+
+.modal-input-container {
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+.modal-input {
+	width: 100%;
+
+}
+
+.income_table {
+	justify-content: center;
+}
+
+.table tr th{
+	border: 1px solid #000;
+	padding: 15px;
+}
+
+.table tr td {
+	border: 1px solid #000;
+	padding: 15px;
+}
+
+@media screen and (max-width: 500px){
+	.income-form-container {
+		padding: 0px;
+	}
+
+	.income-form {
+		padding: 10px;
+	}
+
+	.income-form-item {
+		width: 100%;
+	}
+
+	.modal-input-container {
+		width: 100%;
+	}
+
 }
 

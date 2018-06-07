@@ -18,11 +18,6 @@ class Parameters extends Component {
 		}
 	}
 
-	componentDidMount() {
-		console.log("boxes", api.getBoxes());
-		this.props.getBoxes(api.getBoxes());
-	}
-
 	loadSpinner = () => {
 		this.setState({loading: !this.state.loading})
 	}
@@ -42,9 +37,9 @@ class Parameters extends Component {
 				<div>
 					{loader}
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
-					<div className="col-offset-3 col-6 params-boxes">
+					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 params-boxes">
 						<h2>Boxes</h2>
-						<ConfigBoxes boxes={boxes}/>
+						<ConfigBoxes boxes={boxes} loadSpinner={this.loadSpinner}/>
 						<NewBox loadSpinner={this.loadSpinner}/>
 					</div>
 
@@ -55,7 +50,7 @@ class Parameters extends Component {
 				<div>
 					{loader}
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
-					<div className="col-offset-3 col-6 params-boxes">
+					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 params-boxes">
 						<h2>Boxes</h2>
 						<p className="warning"><FaExclamationCircle/> No Boxes</p>
 						<NewBox loadSpinner={this.loadSpinner}/>

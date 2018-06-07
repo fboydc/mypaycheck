@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import ReactLoading from 'react-loading';
 import {addBox} from '../actions';
 import api from '../api';
 import {connect} from 'react-redux';
+import {NotificationManager} from 'react-notifications';
 
 
 class NewBox extends Component {
@@ -20,14 +20,22 @@ class NewBox extends Component {
 	}
 
 	createBox = ()=>{
+		this.props.loadSpinner()
 		const box = api.createBox(this.state.boxName)
-		this.props.createBox(box);
+		setTimeout(()=>{
+			this.props.createBox(box);
+			this.props.loadSpinner();
+			NotificationManager.success('New box added');
+			this.setState({boxName: ''});
+		}, 1000)
+
+
 	}
 
 
 	render(){
 		return (
-			<div className="col-6 new_box_form">
+			<div className="col-6 col-sm-10 col-xs-10 new_box_form">
 				<div className="new_box_header">
 					<h3>ADD NEW</h3>
 				</div>

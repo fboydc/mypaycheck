@@ -13,11 +13,12 @@ import {
 const incomeDetails = (state = {}, action) => {
 	switch(action.type){
 		case GET_INCOME_DETAILS:{
-			const { annualIncome, filingStatus, payFrequency, federalAllowances, pretaxDeductions, state, city } = action;
+			const { annualIncome, filingStatus, frequency, federalAllowances, pretaxDeductions, state, city } = action;
+			console.log("pretaxDeductions", pretaxDeductions);
 			return {
 					annualIncome: annualIncome,
 					filingStatus: filingStatus,
-					payFrequency: payFrequency,
+					frequency: frequency,
 					federalAllowances: federalAllowances,
 					pretaxDeductions: pretaxDeductions,
 					state: state,
@@ -49,6 +50,55 @@ const boxes = (state = [], action) => {
 					}
 					return state
 				}
+		case REMOVE_BOX: {
+			return state.filter((box)=>box.name != action.name)
+		}
+
+		case ADD_BOX_ITEM: {
+			const { boxName, name, amount } = action;
+			return state.map((item)=>{
+				if(item.name === boxName){
+					item.items = [
+						...item.items,
+						{
+							name: name,
+							amount: amount
+						}
+					]
+
+				}
+
+				return item
+			})
+		}
+
+		case REMOVE_BOX_ITEM: {
+			const {boxName, itemName} = action;
+			return state.map((item)=>{
+				if(item.name === boxName){
+					const updatedItems = item.items.filter((subItem)=>subItem.name != itemName);
+					item.items = updatedItems;
+				}
+
+				return item;
+			})
+		}
+
+		case EDIT_BOX_ITEM: {
+			const { boxName, itemName, amount} = action;
+			return state.map((item)=>{
+				if(item.name === boxName){
+					const updatedItems = item.items.map((subItem)=>{
+						if(subItem.name === itemName)
+							subItem.amount = amount
+						return subItem
+					})
+
+					item.items = updatedItems;
+				}
+				return item;
+			})
+		}
 
 		default:
 			return state;

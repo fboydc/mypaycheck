@@ -32,4 +32,84 @@ const deleteAllBoxes = () => {
 }
 
 
-export default { getBoxes, getIncomeDetails, createBox, deleteAllBoxes, addIncomeDetails}
+const deleteBox = (name) => {
+	const boxes = getBoxes();
+	const filtered = boxes.filter((box)=>(box.name != name));
+	if(filtered.length === 0)
+		localStorage.removeItem('boxes');
+	else
+		localStorage.setItem('boxes', JSON.stringify(filtered));
+	return name;
+}
+
+const addBoxItem = (boxName, name, amount) =>{
+	const allboxes = JSON.parse(localStorage.getItem('boxes'));
+	console.log("here at addBoxItems");
+
+	const updatedBox = allboxes.map((item)=>{
+		console.log("name passed is", boxName)
+		console.log("box name is", item.name);
+		if(item.name === boxName){
+			console.log('box items')
+			item.items = [
+				...item.items,
+				{
+					name: name,
+					amount: amount
+				}
+			]
+		}
+
+		return item
+	});
+
+	console.log("updated box", updatedBox);
+
+	localStorage.setItem('boxes', JSON.stringify(updatedBox));
+
+	return ({boxName, name, amount})
+
+}
+
+const deleteBoxItem = (boxName, itemName) =>{
+	console.log("boxName is", boxName);
+	console.log("itemName is", itemName);
+	const allBoxes = getBoxes();
+	const filtered = allBoxes.map((item)=>{
+		if(item.name === boxName){
+			const updatedItems = item.items.filter((subItem)=>subItem.name !== itemName);
+			item.items = updatedItems;
+			return item;
+		}
+		console.log("item", item);
+
+		return item;
+	});
+
+	localStorage.setItem('boxes', JSON.stringify(filtered));
+	return ({boxName, itemName})
+}
+
+const editBoxItem = (boxName, itemName, amount) => {
+	const allBoxes = getBoxes();
+	const filtered = allBoxes.map((item)=>{
+		if(item.name === boxName){
+			const updatedItems = item.items.map((subItem)=>{
+				if(subItem.name === itemName)
+					subItem.amount = amount
+
+				return subItem
+			})
+			item.items = updatedItems;
+		}
+
+		return item;
+	});
+
+	localStorage.setItem('boxes', JSON.stringify(filtered));
+	return ({boxName, itemName, amount});
+
+}
+
+
+export default { getBoxes, getIncomeDetails, createBox, deleteAllBoxes, addIncomeDetails, deleteBox, addBoxItem, deleteBoxItem, editBoxItem}

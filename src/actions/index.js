@@ -25,12 +25,12 @@ export const addIncomeDetails = ({annualIncome, filingStatus, payFrequency, fede
 	}
 }
 
-export const getIncomeDetails = ({annualIncome, filingStatus, payFrequency, federalAllowances, pretaxDeductions, state, city}) => {
+export const getIncomeDetails = ({annualIncome, filingStatus, frequency, federalAllowances, pretaxDeductions, state, city}) => {
 	return {
 		type: GET_INCOME_DETAILS,
 		annualIncome,
 		filingStatus,
-		payFrequency,
+		frequency,
 		federalAllowances,
 		pretaxDeductions,
 		state,
@@ -54,35 +54,40 @@ export const getBoxes = (boxes)=>{
 	}
 }
 
-export const removeBox = ({name}) => {
+export const removeBox = (name) => {
 	return {
 		type: REMOVE_BOX,
 		name
 	}
 }
 
-export const addBoxItem = ({name, amount}) => {
+export const addBoxItem = ({boxName, name, amount}) => {
 	return {
 		type: ADD_BOX_ITEM,
+		boxName,
 		name,
 		amount
 	}
 }
 
-export const removeBoxItem = ({name}) => {
+export const removeBoxItem = ({boxName, itemName}) => {
 	return {
 		type: REMOVE_BOX_ITEM,
-		name
+		boxName,
+		itemName
 	}
 }
 
-export const editBoxItem = ({name, amount}) => {
+export const editBoxItem = ({boxName, itemName, amount}) => {
 	return {
 		type: EDIT_BOX_ITEM,
-		name,
+		boxName,
+		itemName,
 		amount
 	}
 }
+
+
 
 
 
