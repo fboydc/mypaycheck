@@ -105,6 +105,9 @@ const boxes = (state = [], action) => {
 	}
 }
 
+
+
+
 export default combineReducers({
 	incomeDetails,
 	boxes

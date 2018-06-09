@@ -1,36 +1,42 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import IncomeDistribution from './IncomeDistribution';
 
-export default class Cashflow extends Component{
+class Cashflow extends Component{
+
+
+
+
 	render(){
-		return (
-			<div className="col-offset-3 col-6 title">
-					<h2>Cash Inflow Distribution</h2>
-					<div className="row income_table">
-						<table className="table">
-							<tbody>
-								<tr>
-									<th>Pay Frequency</th>
-									<th>Net Periodic Income</th>
-								</tr>
-								<tr>
-									<td>
 
-									</td>
-									<td>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-			</div>
-		)
+		const {annualIncome, frequency} = this.props;
+
+		if(!annualIncome){
+			return (
+				<div className="col-offset-3 col-6 title">
+					<h2>Cash Inflow Distribution</h2>
+					<p>No Income Data</p>
+				</div>
+			)
+		}else {
+			return (
+				<IncomeDistribution/>
+			)
+
+		}
+
+
+
 	}
 }
 
 
 const mapStateToProps = (state)=> {
 	return {
-
+		frequency: state.incomeDetails.frequency,
+		annualIncome: state.incomeDetails.annualIncome
 	}
 }
+
+
+export default connect(mapStateToProps, null)(Cashflow)

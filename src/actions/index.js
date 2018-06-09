@@ -12,6 +12,7 @@ export const EDIT_BOX_ITEM = 'EDIT_BOX_ITEM'
 
 
 
+
 export const addIncomeDetails = ({annualIncome, filingStatus, payFrequency, federalAllowances, pretaxDeductions, state, city}) => {
 	return {
 		type: ADD_INCOME_DETAILS,
@@ -86,6 +87,7 @@ export const editBoxItem = ({boxName, itemName, amount}) => {
 		amount
 	}
 }
+
 
 
 
