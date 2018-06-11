@@ -3,34 +3,50 @@ import { CITIES } from './citytax'
 
 export default class FormattedIncome {
 
-	constructor({annualIncome, filingStatus, federalAllowances}){
-		this.afterTaxAnnualIncome = this.getTaxableIncome(annualIncome, federalAllowances, filingStatus);
+	constructor({annualIncome, filingStatus, frequency, federalAllowances, pretaxDeductions, city, state}){
+		this.grossIncome = annualIncome;
+		this.filingStatus = filingStatus;
+		this.frequency = frequency;
+		this.federalAllowances = federalAllowances;
+		this.pretaxDeductions = pretaxDeductions;
+		this.city = city;
+		this.state = state;
+		this.taxableIncome = this.getTaxableIncome(annualIncome, federalAllowances, filingStatus);
 		this.ss = 0.062;
 		this.medicare = 0.0145;
 	}
 
 
 
-	getMonthlyIncome = (taxableIncome, federalAllowances, pretaxDeductions, filingStatus, city, state) => {
-		const incomeTaxPayable = this.getIncomeTax(taxableIncome, federalAllowances, filingStatus);
-		const stateTax = STATES[state];
-		const federalIncomeTax = this.getIncomeTax(taxableIncome, filingStatus);
-		const socialSecurity = this.getSocialSecurityDeduction(taxableIncome);
-		const medicare = this.getMedicareDeduction(taxableIncome);
-
-		const afterTaxIncome = taxableIncome - incomeTaxPayable - federalIncomeTax - socialSecurity - medicare;
+	getMonthlyIncome = () => {
+		//const incomeTaxPayable = this.getIncomeTax(taxableIncome, federalAllowances, filingStatus);
+		const stateTax = STATES[this.state];
+		//console.log("filing status", this.filingStatus);
+		console.log("taxable Income", this.taxableIncome);
+		const federalIncomeTax = this.getIncomeTax(this.taxableIncome, this.filingStatus);
+		console.log("federal Income Tax", federalIncomeTax);
+		const socialSecurity = this.getSocialSecurityDeduction(this.taxableIncome);
+		console.log("social security", socialSecurity);
+		const medicare = this.getMedicareDeduction(this.taxableIncome);
+		console.log("medicare", medicare);
+		const afterTaxIncome = this.grossIncome - (federalIncomeTax + socialSecurity + medicare);
+		console.log("Income after taxes", afterTaxIncome);
 		const monthlyIncomeBeforeDeductions = afterTaxIncome/12;
-		const monthlyIncome = monthlyIncomeBeforeDeductions - this.getotherDeductions(monthlyIncomeBeforeDeductions, pretaxDeductions);
-
+		console.log("income before deductions", monthlyIncomeBeforeDeductions);
+		const monthlyIncome = this.getotherDeductions(monthlyIncomeBeforeDeductions, this.pretaxDeductions);
+		console.log("monthly income", monthlyIncome);
 		return monthlyIncome;
-
-
 
 	}
 
+	getPeriodicIncome = ()=>{
+		const income = this.getMonthlyIncome(this.pretaxDeductions, this.city, this.state)/2;
+		return income.toFixed(2);
+	}
 
-	getTaxableIncome = (annualIncome, federalAllowances, filingStatus)=>{
-		const taxableIncome = annualIncome - (this.getExemptionDeduction(federalAllowances)+ this.getStandardDeductionAmount(filingStatus))
+
+	getTaxableIncome = (annualIncome, federalAllowances, filingStatus)=>{	
+		const taxableIncome = annualIncome - (this.getExemptionDeduction(federalAllowances) + this.getStandardDeductionAmount(filingStatus))
 		return taxableIncome;
 	}
 
@@ -44,7 +60,7 @@ export default class FormattedIncome {
 		switch(filingStatus){
 			case "single":
 				return 6300
-			case "joinlty":
+			case "jointly":
 				return 12600
 			default:
 				return
@@ -54,8 +70,10 @@ export default class FormattedIncome {
 
 
 	getIncomeTax = (taxableIncome, filingStatus)=> {
+		//console.log("filing status", filingStatus);
 		if(filingStatus === 'single'){
-			switch(taxableIncome){
+			console.log(taxableIncome >= 37950 && taxableIncome < 91900);
+			switch(true){
 				case (taxableIncome >= 0 && taxableIncome < 9325): // 10%
 					return (.10 * taxableIncome);
 				case (taxableIncome >= 9325 && taxableIncome < 37950): // 15%
@@ -74,7 +92,7 @@ export default class FormattedIncome {
 					return 0;
 			}
 		}else if(filingStatus === 'jointly'){
-			switch(taxableIncome){
+			switch(true){
 				case (taxableIncome >= 0 && taxableIncome < 18650): // 10%
 					return (.10 * taxableIncome);
 				case (taxableIncome >= 18650 && taxableIncome < 75900): // 15%

@@ -24,15 +24,27 @@ class Parameters extends Component {
 
 
 	render(){
-		const { boxes } = this.props;
+		const { boxes, incomeDetails } = this.props;
 
 		let loader;
 		if(this.state.loading){
 			loader = <ReactLoading type={"spin"} color={"#000"} className="loading"/>
 		}
 
+		console.log("length", Object.keys(incomeDetails).length);
 
-		if(boxes.length > 0){
+		if(Object.keys(incomeDetails).length === 0){
+			return (
+				<div>
+					{loader}
+					<IncomeDetails loadSpinner={this.loadSpinner}/>
+					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 params-boxes">
+						<h2>Boxes</h2>
+						<p>Please fill out your income details first.</p>
+					</div>
+				</div>
+			)
+		}else if(boxes.length > 0){
 			return(
 				<div>
 					{loader}
@@ -45,7 +57,7 @@ class Parameters extends Component {
 
 				</div>
 			)
-		}else{
+		} else{
 			return(
 				<div>
 					{loader}
@@ -71,7 +83,8 @@ const mapStateToProps = (state) => {
 
 	//console.log("state in props", state);
 	return {
-		boxes: state.boxes
+		boxes: state.boxes,
+		incomeDetails: state.incomeDetails
 	}
 }
 
