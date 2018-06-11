@@ -29,7 +29,7 @@
 
 .income_distribution {
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -340,7 +340,11 @@
 .boxitem_item {
 	margin-bottom: 0;
 	align-items: center;
+}
 
+.box_distribution {
+	display: flex;
+	align-items: center;
 }
 
 
@@ -442,6 +446,10 @@
 	width: 10px;
 	height: 10px;
 	margin-right: 5px;
+}
+
+.centered {
+	text-align: center;
 }
 
 

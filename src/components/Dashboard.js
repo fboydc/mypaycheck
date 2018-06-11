@@ -4,6 +4,8 @@ import FaPaperPlane from 'react-icons/lib/fa/paper-plane-o';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PieContainer from './PieContainer';
+import MonthlySalary from './MonthlySalary';
+import BoxDistribution from './BoxDistribution';
 import FormattedIncome from '../helpers';
 
 
@@ -16,7 +18,7 @@ class Dashboard extends Component {
 
 
 	render(){
-		const {incomeDetails, boxes} = this.props;
+		const {incomeDetails, boxes, monthlySalary} = this.props;
 
 		if (Object.keys(incomeDetails).length === 0 || boxes.length === 0){
 			return (
@@ -37,15 +39,32 @@ class Dashboard extends Component {
 					</section>
 				)
 			}else{
+
+				const salaryData = [...this.props.boxes.map((box)=>{
+						let total = 0;
+						box.items.forEach((item)=>{
+							total += Number(item.amount);
+						})
+
+						return {
+							item: box.name,
+							value: total.toFixed(2)
+						}
+					})];
+
 				return (
 					<section className="row income_distribution">
 						<h2>Income Distribution</h2>
 						<p>Income Distributed as configured</p>
-						<PieContainer boxes={this.props.boxes} monthly={this.props.monthlySalary}/>
+						<PieContainer roofValue={this.props.monthlySalary} data={salaryData} />
+						<MonthlySalary monthly={monthlySalary}/>
+						{this.props.boxes.map(box=>{
+							return <BoxDistribution box={box}/>
+						})}
 					</section>
 				)
 			}
-			
+
 		}
 
 	}

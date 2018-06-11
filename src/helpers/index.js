@@ -19,22 +19,14 @@ export default class FormattedIncome {
 
 
 	getMonthlyIncome = () => {
-		//const incomeTaxPayable = this.getIncomeTax(taxableIncome, federalAllowances, filingStatus);
+
 		const stateTax = STATES[this.state];
-		//console.log("filing status", this.filingStatus);
-		console.log("taxable Income", this.taxableIncome);
 		const federalIncomeTax = this.getIncomeTax(this.taxableIncome, this.filingStatus);
-		console.log("federal Income Tax", federalIncomeTax);
 		const socialSecurity = this.getSocialSecurityDeduction(this.taxableIncome);
-		console.log("social security", socialSecurity);
 		const medicare = this.getMedicareDeduction(this.taxableIncome);
-		console.log("medicare", medicare);
 		const afterTaxIncome = this.grossIncome - (federalIncomeTax + socialSecurity + medicare);
-		console.log("Income after taxes", afterTaxIncome);
 		const monthlyIncomeBeforeDeductions = afterTaxIncome/12;
-		console.log("income before deductions", monthlyIncomeBeforeDeductions);
 		const monthlyIncome = this.getotherDeductions(monthlyIncomeBeforeDeductions, this.pretaxDeductions);
-		console.log("monthly income", monthlyIncome);
 		return monthlyIncome;
 
 	}
@@ -45,7 +37,7 @@ export default class FormattedIncome {
 	}
 
 
-	getTaxableIncome = (annualIncome, federalAllowances, filingStatus)=>{	
+	getTaxableIncome = (annualIncome, federalAllowances, filingStatus)=>{
 		const taxableIncome = annualIncome - (this.getExemptionDeduction(federalAllowances) + this.getStandardDeductionAmount(filingStatus))
 		return taxableIncome;
 	}
