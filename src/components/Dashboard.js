@@ -58,9 +58,11 @@ class Dashboard extends Component {
 						<p>Income Distributed as configured</p>
 						<PieContainer roofValue={this.props.monthlySalary} data={salaryData} />
 						<MonthlySalary monthly={monthlySalary}/>
-						{this.props.boxes.map(box=>{
-							return <BoxDistribution box={box}/>
-						})}
+						<div className="box_distributions">
+							{this.props.boxes.map(box=>{
+								return <BoxDistribution box={box}/>
+							})}
+						</div>
 					</section>
 				)
 			}

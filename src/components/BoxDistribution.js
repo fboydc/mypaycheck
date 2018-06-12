@@ -23,7 +23,7 @@ export default class BoxDistribution extends Component {
 		})
 
 		return (
-			<div className="box_distribution">
+			<div className="box_distribution col-12 col-sm-12 col-xs-12">
 				<table className="table">
 					<tbody>
 						{items.map(item=>{
