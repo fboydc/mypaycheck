@@ -28,7 +28,7 @@ class Cashflow extends Component{
 			)
 		}else {
 			return (
-				<div className="col-12 col-sm-12 col-xs-12">
+				<div className="row cashflow_container">
 					<IncomeDistribution incomeDetails={incomeDetails}/>
 					<Boxes boxes/>
 				</div>

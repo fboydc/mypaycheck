@@ -17,7 +17,7 @@ export default class Box extends Component {
 		const length = this.props.box.items.length;
 		return (
 			<div className="box_table">
-				<table>
+				<table className="table">
 					<tbody className="table">
 						<tr>
 							<th colSpan={2}>
@@ -30,14 +30,14 @@ export default class Box extends Component {
 						</tr>
 						{
 							this.props.box.items.map((item, i)=>{
-								
+
 									return (
-										<tr>
+										<tr key={item.name}>
 											<td>{item.name}</td>
 											<td>{item.amount}</td>
 										</tr>
 									)
-								
+
 							})
 
 						}

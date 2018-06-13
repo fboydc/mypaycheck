@@ -1,6 +1,6 @@
 .header {
 	height: 70px;
-	background-color: #000;
+	background-color: #29335C;
 	text-align: center;
 	color: #FFF;
 	padding: 0;
@@ -35,11 +35,12 @@
 
 .no_data {
 	display: flex;
-	border: 1px solid #000;
+	border: 1px solid #ddd;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	height: 500px;
+	color: #29335C;
 
 }
 
@@ -61,7 +62,10 @@
 
 
 .title {
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 
@@ -71,7 +75,7 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 25px;
-	border: 1px solid #000;
+	border: 1px solid #ddd;
 	border-radius: 5px;
 }
 
@@ -126,16 +130,16 @@
 
 .input {
 	width: 100%;
-	height: 30px;
+	padding: 12px 20px;
 	border-radius: 2px;
-	border: 1px solid #000;
+	border: 1px solid #ddd;
 }
 
 .income-form-item select {
 	width: 100%;
-	height: 30px;
+	height: 40px;
 	border-radius: 2px;
-	border: 1px solid #000;
+	border: 1px solid #ddd;
 }
 .button-container {
 	display: flex;
@@ -148,8 +152,8 @@
 	padding-top: 10px;
 	padding-left: 25px;
 	padding-right: 25px;
-	background-color: #2699FB;
-	border: 1px solid #2699FB;
+	background-color: #E4572E;
+	border: 1px solid #E4572E;
 	color: #FFF;
 	cursor: pointer;
 }
@@ -176,14 +180,21 @@
 }
 
 .locked {
-	background-color: #EBEBEE;
+	/*background-color: #EBEBEE;*/
+	background-color: #ddd;
+	color: #29335C;
+}
+.locked-lock {
+	border: 1px solid #E4572E;
+	background-color: #E4572E;
 }
 
 .locked .button {
 	visibility: hidden;
 }
 .loading {
-	height: 555.83px;
+	position: absolute;
+	top: vw;
 }
 
 
@@ -204,14 +215,14 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid #000;
+	border: 1px solid #ddd;
 	height: 200px;
 	margin-bottom: 100px;
 }
 
 .new_box_header {
 	width: 100%;
-	background-color: #2699FB;
+	background-color: #A8C686;
 }
 
 .new_box_body {
@@ -241,25 +252,93 @@
 
 
 .buttons_container {
-	/*justify-content: center;
-	padding: 10px;*/
+	justify-content: center;
+	padding: 10px;
+}
+.config_container{
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .config_boxes_container {
 	display:flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-around;
 	margin-bottom: 30px;
+	min-height: 800px;
 }
 
-.config-box {
+/*.config-box {
 	color: #FFF;
-	border: 1px solid #000;
 	border-radius: 5px;
-	height: 200px;
+	height: 300px;
+	width: 370px;
 	overflow-y: auto;
 	margin-bottom: 30px;
+	border: 1px solid gray;
+	padding: 5px;
+	background-color: #2699FB;
+}*/
+
+.config_table_container {
+	width: 350px;
+	margin-bottom: 30px;
+	border-radius: 10px;
 }
+
+.table_config {
+	border-radius: 5px;
+	border-collapse: collapse;
+	padding: 15px;
+	width: 350px;
+	color: #000;
+}
+
+.table_config thead {
+	width: 350px;
+	overflow: auto;
+	color: #fff;
+	background: #A8C686;
+}
+
+.table_config tbody {
+	display: block;
+	width: 350px;
+	height: 200px;
+	background: #fff;
+	overflow: auto;
+}
+
+.table_config th {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.table_config th,td {
+	padding: .5em 1em;
+	text-align: left;
+	width: 100%;
+}
+
+.table_config thead tr {
+	background-color: #A8C686;
+}
+
+
+.table_config tbody td{
+	width: 33%;
+}
+
+
+
+.table_config tr {
+	background-color: #669BBC;
+}
+
+.table_config tr:nth-child(even){background-color: #9bbed3;}
 
 .config-box::-webkit-scrollbar {
 	width: 10px;
@@ -282,8 +361,8 @@
 .config_box_button_inverse {
 	padding: 5px;
 	border-radius: 5px;
-	background-color: #2699FB;
-	border: 1px solid #FFF;
+	background-color: #fff;
+	border: 1px solid #000;
 	font-size: 1em;
 }
 
@@ -307,9 +386,11 @@
 
 .boxes_content {
 	flex-wrap: wrap;
-	border: 1px solid #000;
+	border: 1px solid #ddd;
 	padding: 20px;
 	justify-content: space-around;
+	box-sizing: border-box;
+	background-color: #F3A712;
 }
 
 .box-title-container {
@@ -340,6 +421,8 @@
 .boxitem_item {
 	margin-bottom: 0;
 	align-items: center;
+	border: 1px solid #000;
+	background-color: #fff;
 }
 
 .box_distribution {
@@ -405,6 +488,15 @@
 
 }
 
+.cashflow_container {
+	flex-direction: column;
+	align-items: center;
+}
+
+.exclamation {
+	font-size: 3em;
+}
+
 .income_table {
 	justify-content: center;
 }
@@ -413,19 +505,20 @@
 	margin-bottom: 25px;
 }
 
-.box_table th {
-
+.table {
+	border-collapse: collapse;
 }
 
+.table tr:nth-child(even){background-color: #ddd;}
 
 .table tr th{
-	border: 1px solid #000;
 	padding: 15px;
-	width: 300px;
+	background-color: #29335C;
+	color: #fff;
+	border-bottom: 1px solid #ddd;
 }
 
 .table tr td {
-	border: 1px solid #000;
 	padding: 15px;
 	width: 300px;
 }
@@ -434,20 +527,22 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	align-items: center;
 	flex: 1;
 }
 
 .pie_container {
 	display:flex;
+	flex-wrap: wrap;
 	align-items: center;
+	justify-content: center;
 }
 .pie {
 	height: 250px;
 }
 
 .svg {
-	margin: 0;
-	width: 250px;
+	width: 100%;
 	height: 250px;
 }
 

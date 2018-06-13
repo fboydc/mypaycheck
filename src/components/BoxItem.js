@@ -72,6 +72,47 @@ class BoxItem extends Component {
 
 	render(){
 		const {amount, name} = this.props;
+
+		return (
+			<tr>
+				<td>{name}</td>
+				<td>{amount}</td>
+				<td>
+					<button className="config_box_button_inverse"><FaTrash onClick={this.deleteItem}/></button>
+					<button className="config_box_button_inverse"><FaPencil onClick={this.toggleEditItemModal}/></button>
+				</td>
+				<td>
+					<Modal isOpen={this.state.open} style={customStyles} onRequestClose={this.toggleEditItemModal} className="modal">
+						<div className="modal-close-button">
+							<button onClick={this.toggleEditItemModal}>x</button>
+						</div>
+						<h3>
+							Edit Item
+						</h3>
+						<div className="modal-input-row">
+							<div className="modal-label">
+								<label>Name</label>
+							</div>
+							<div className="modal-input-container">
+								<input type="text" className="input modal-input" ref={(input)=>{this.itemName = input}} value={this.state.name} onChange={this.handleNameChange} disabled/>
+							</div>
+						</div>
+						<div className="modal-input-row">
+							<div className="modal-label">
+								<label>Amount</label>
+							</div>
+							<div className="modal-input-container">
+								<input type="number" className="input modal-input" ref={(input)=>{this.itemAmount = input}} value={this.state.amount} onChange={this.handleAmountChange}/>
+							</div>
+						</div>
+						<div className="modal-input-row modal-button-container">
+								<button className="button" onClick={this.editItem}>Save</button>
+						</div>
+					</Modal>
+				</td>
+			</tr>
+		)
+		/*
 		return (
 			<div className="row boxitem_item">
 				<p className="col-4 col-sm-4 col-xs-4">{name}</p>
@@ -109,7 +150,7 @@ class BoxItem extends Component {
 				</Modal>
 			</div>
 
-		)
+		)*/
 	}
 }
 

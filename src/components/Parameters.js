@@ -19,6 +19,7 @@ class Parameters extends Component {
 	}
 
 	loadSpinner = () => {
+		console.log("loading spinner");
 		this.setState({loading: !this.state.loading})
 	}
 
@@ -26,19 +27,18 @@ class Parameters extends Component {
 	render(){
 		const { boxes, incomeDetails } = this.props;
 
-		let loader;
-		if(this.state.loading){
-			loader = <ReactLoading type={"spin"} color={"#000"} className="loading"/>
-		}
 
 		console.log("length", Object.keys(incomeDetails).length);
 
-		if(Object.keys(incomeDetails).length === 0){
+		if(this.state.loading){
+			return (<div className="row config_container">
+				<ReactLoading type={"spin"} color={"#000"} />
+			</div>);
+		}else if(Object.keys(incomeDetails).length === 0){
 			return (
-				<div>
-					{loader}
+				<div className="row config_container">
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
-					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 params-boxes">
+					<div className="col-offset-1 col-10 col-offset-sm-1 col-sm-12 params-boxes">
 						<h2>Boxes</h2>
 						<p>Please fill out your income details first.</p>
 					</div>
@@ -46,10 +46,9 @@ class Parameters extends Component {
 			)
 		}else if(boxes.length > 0){
 			return(
-				<div>
-					{loader}
+				<div className="row config_container">
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
-					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 params-boxes">
+					<div className="col-10 col-sm-10 col-xs-12 params-boxes">
 						<h2>Boxes</h2>
 						<ConfigBoxes boxes={boxes} loadSpinner={this.loadSpinner}/>
 						<NewBox loadSpinner={this.loadSpinner}/>
@@ -60,9 +59,8 @@ class Parameters extends Component {
 		} else{
 			return(
 				<div>
-					{loader}
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
-					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 params-boxes">
+					<div className="col-10 col-sm-10 col-xs-12 params-boxes">
 						<h2>Boxes</h2>
 						<p className="warning"><FaExclamationCircle/> No Boxes</p>
 						<NewBox loadSpinner={this.loadSpinner}/>

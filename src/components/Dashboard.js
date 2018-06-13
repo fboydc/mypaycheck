@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import api from '../api';
 import FaPaperPlane from 'react-icons/lib/fa/paper-plane-o';
+import FaExclamationCircle from 'react-icons/lib/fa/exclamation-circle';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PieContainer from './PieContainer';
@@ -26,6 +27,14 @@ class Dashboard extends Component {
 					<p className="icon"><FaPaperPlane /></p>
 					<p>NO PARAMETERS SET. CLICK HERE TO START:</p>
 					<Link to="/parameters" className="link_btn">PARAMETERS</Link>
+				</section>
+			)
+		}else if(this.props.totalInBoxes.toFixed(2) !== this.props.monthlySalary.toFixed(2)){
+
+			return (
+				<section className="no_data col-offset-3 col-6">
+					<p><strong>Please make sure your entire salary is allocated</strong></p>
+					<FaExclamationCircle className="exclamation"/>
 				</section>
 			)
 		}else{

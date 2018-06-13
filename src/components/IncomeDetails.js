@@ -126,10 +126,10 @@ class IncomeDetails extends Component {
 
 
 			return(
-					<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 col-offset-xs-1 col-xs-10 income-form-container locked">
+					<div className="col-10 col-sm-12 col-xs-12 income-form-container locked">
 						<div className="income-form-header">
 							<h2>Income Details</h2>
-							<button className="lock" onClick={this.toggleLock}><FaLock /></button>
+							<button className="lock locked-lock" onClick={this.toggleLock}><FaLock /></button>
 						</div>
 						<div className="income-form">
 							<div className="income-form-item">
@@ -185,7 +185,7 @@ class IncomeDetails extends Component {
 
 		}else{
 			return(
-				<div className="col-offset-3 col-6 col-offset-sm-2 col-sm-8 col-offset-xs-1 col-xs-10 income-form-container">
+				<div className="col-10 col-sm-12 col-xs-12 income-form-container income-form-container">
 					<div className="income-form-header">
 						<h2>Income Details</h2>
 						<button className="lock" onClick={this.toggleLock}><FaUnlockAlt /></button>

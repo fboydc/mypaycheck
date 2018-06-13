@@ -80,8 +80,61 @@ class ConfigBox extends Component {
 		const {name, items} = this.props
 		console.log("items", items);
 		if(items.length > 0){
+
 			return (
-					<div className="col-5 col-sm-8 col-xs-12 config-box">
+
+				<div className="config_table_container">
+					<table className="table_config">
+
+							<thead>
+								<tr>
+									<th>
+										{name}
+										<span><button className="config_box_button" onClick={this.toggleNewItemModal}><FaPlusCircle /></button>
+										<button className="config_box_button" onClick={this.deleteBox}><FaTrash /></button></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+							{ items.map((item)=>{
+										return (
+											<BoxItem boxName={name} name={item.name} amount={item.amount} key={item.name} spinner={this.props.loadSpinner}/>
+										)
+									})
+							}
+							</tbody>
+					</table>
+					<Modal isOpen={this.state.open} style={customStyles} onRequestClose={this.toggleNewItemModal} className="modal">
+								<div className="modal-close-button">
+									<button onClick={this.toggleNewItemModal}>x</button>
+								</div>
+								<h3>
+									Add Item
+								</h3>
+								<div className="modal-input-row">
+									<div className="modal-label">
+										<label>Name</label>
+									</div>
+									<div className="modal-input-container">
+										<input type="text" className="input modal-input" ref={(input)=>{this.itemName = input}} value={this.state.name} onChange={this.handleNameChange}/>
+									</div>
+								</div>
+								<div className="modal-input-row">
+									<div className="modal-label">
+										<label>Amount</label>
+									</div>
+									<div className="modal-input-container">
+										<input type="number" className="input modal-input" ref={(input)=>{this.itemAmount = input}} value={this.state.amount} onChange={this.handleAmountChange}/>
+									</div>
+								</div>
+								<div className="row modal-input-row modal-button-container">
+										<button className="button" onClick={this.addItem}>Save</button>
+								</div>
+						</Modal>
+				</div>
+			)
+			/*return (
+					<div className="config-box">
 						<div className="row config-box-header">
 							<span className="col-6 col-sm-6 col-xs-6 box-title-container">{name}</span>
 							<span className="col-6 col-sm-6 col-xs-6 box-buttons-container">
@@ -125,11 +178,59 @@ class ConfigBox extends Component {
 							</div>
 						</Modal>
 					</div>
-				)
+				)*/
 
 		}else{
+
 			return (
-				<div className="col-5 col-sm-8 col-xs-12 config-box">
+					<div className="config_table_container">
+						<table className="table_config">
+							<thead>
+								<tr>
+									<th>
+										{name}
+										<span><button className="config_box_button" onClick={this.toggleNewItemModal}><FaPlusCircle /></button>
+										<button className="config_box_button" onClick={this.deleteBox}><FaTrash /></button></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><p>No box items configured.</p></td>
+								</tr>
+							</tbody>
+						</table>
+						<Modal isOpen={this.state.open} style={customStyles} onRequestClose={this.toggleNewItemModal} className="modal">
+								<div className="modal-close-button">
+									<button onClick={this.toggleNewItemModal}>x</button>
+								</div>
+								<h3>
+									Add Item
+								</h3>
+								<div className="modal-input-row">
+									<div className="modal-label">
+										<label>Name</label>
+									</div>
+									<div className="modal-input-container">
+										<input type="text" className="input modal-input" ref={(input)=>{this.itemName = input}} value={this.state.name} onChange={this.handleNameChange}/>
+									</div>
+								</div>
+								<div className="modal-input-row">
+									<div className="modal-label">
+										<label>Amount</label>
+									</div>
+									<div className="modal-input-container">
+										<input type="number" className="input modal-input" ref={(input)=>{this.itemAmount = input}} value={this.state.amount} onChange={this.handleAmountChange}/>
+									</div>
+								</div>
+								<div className="row modal-input-row modal-button-container">
+										<button className="button" onClick={this.addItem}>Save</button>
+								</div>
+						</Modal>
+					</div>
+				)
+			/*return (
+				<div className="config-box">
 					<div className="row config-box-header">
 						<span className="col-6 col-sm-6 col-xs-6 box-title-container">{name}</span>
 						<span className="col-6 col-sm-6 col-xs-6 box-buttons-container">
@@ -169,7 +270,7 @@ class ConfigBox extends Component {
 					</Modal>
 				</div>
 
-			)
+			)*/
 		}
 
 	}

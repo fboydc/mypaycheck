@@ -16,7 +16,7 @@ class ConfigBoxes extends Component {
 
 		if((this.props.monthly - this.props.total) !== 0){
 			return(
-				<div className="col-12 col-sm-10 col-xs-10 config_boxes_container">
+				<div className="col-10 col-sm-12 col-xs-12 config_boxes_container">
 					<div className="buttons_container">
 						<p>total boxes: {this.props.numOfBoxes}</p>
 						<p>Warning: Please allocate your total monthly income of <strong>{this.props.monthly}</strong> to your boxes</p>
@@ -30,7 +30,7 @@ class ConfigBoxes extends Component {
 		}
 
 		return (
-			<div className="col-12 col-sm-10 col-xs-10 config_boxes_container">
+			<div className="col-10 col-sm-10 col-xs-12 config_boxes_container">
 				<div className="buttons_container">
 					<p>total boxes: {this.props.numOfBoxes}</p>
 					<p>Monthly Income Allocated</p>
@@ -57,7 +57,7 @@ const mapStateToProps = (state)=> {
 	return {
 		numOfBoxes: state.boxes.length,
 		total: totalInBoxes,
-		monthly: new FormattedIncome(state.incomeDetails).getMonthlyIncome().toFixed(2) 
+		monthly: new FormattedIncome(state.incomeDetails).getMonthlyIncome().toFixed(2)
 	}
 }
 
