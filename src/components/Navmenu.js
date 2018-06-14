@@ -12,7 +12,8 @@ class Navmenu extends Component{
 	constructor(){
 		super();
 		this.state = {
-			vpwidth: window.innerWidth
+			vpwidth: window.innerWidth,
+			hidden: true
 		}
 	}
 
@@ -33,11 +34,14 @@ class Navmenu extends Component{
 		window.removeEventListener('resize');
 	}
 
+	toggleDropDown = ()=>{
+		this.setState({hidden: !this.state.hidden})
+	}
 
 	render(){
 
 
-		if(this.state.vpwidth > 438){
+		if(this.state.vpwidth > 454){
 			return(
 				<header className="row header">
 					<nav className="navmenu">
@@ -49,19 +53,27 @@ class Navmenu extends Component{
 					</nav>
 				</header>
 			);
+		}else if(this.state.hidden){
+			return (
+				<header className="mobile_header">
+					<div className="hamburger_container">
+						<span className="hamburger" onClick={this.toggleDropDown}>
+							<FaBars />
+						</span>
+					</div>
+				</header>
+				)
 		}else{
 			return(
-				<header className="row header mobile_header">
-					<div>
-						<button className="hamburger">
+				<header className="mobile_header">
+					<div className="hamburger_container">
+						<span className="hamburger" onClick={this.toggleDropDown}>
 							<FaBars />
-						</button>
+						</span>
 					</div>
-					<div className="dropdown-content">
-						<li><Link to="/">DASHBOARD</Link></li>
-						<li><Link to="/cashflow">CASHFLOW PLAN</Link></li>
-						<li><Link to="/parameters">PARAMETERS</Link></li>
-					</div>
+					<Link to="/" className="mobile_link">DASHBOARD</Link>
+					<Link to="/cashflow" className="mobile_link">CASHFLOW PLAN</Link>
+					<Link to="/parameters" className="mobile_link">PARAMETERS</Link>
 				</header>
 				);
 		}

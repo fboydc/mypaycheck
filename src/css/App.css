@@ -89,7 +89,7 @@
 }
 
 .income-form-header {
-		text-align: center;
+	text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -562,22 +562,42 @@
 }
 
 .mobile_header {
+	width: 100%;
+	background-color: #29335C;
+	display: flex;
 	flex-direction: column;
-	justify-content: center;
+
 }
 
-.hamburger {
-	width: 50px;
-	height: 50px;
-	font-size: 25px;
+.mobile_header a {
+	color: #fff;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.icon {
 	right: 0;
-	background-color: #29335C;
+	font-size: 25px;
+	padding: 14px 16px;
+
+}
+
+.hamburger_container {
+	padding: 14px 16px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	border-bottom: 1px solid #FFF;
+}
+.hamburger {
+	display: block;
+	right: 0;
+	font-size: 25px;
 	color: #FFF;
 
 }
 
-.dropdown-content {
-}
 
 
 .hamburger:hover {
