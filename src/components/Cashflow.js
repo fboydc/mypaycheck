@@ -30,7 +30,7 @@ class Cashflow extends Component{
 			return (
 				<div className="row cashflow_container">
 					<IncomeDistribution incomeDetails={incomeDetails}/>
-					<Boxes boxes/>
+					<Boxes boxes frequency={incomeDetails.frequency}/>
 				</div>
 
 			)

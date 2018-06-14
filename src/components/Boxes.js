@@ -7,7 +7,7 @@ class Boxes extends Component {
 	render(){
 		return(
 			<div className="col-10 col-sm-10 col-xs-11 boxes">
-				{this.props.boxes.map((box)=><Box box={box} key={box.name}/>)}
+				{this.props.boxes.map((box)=><Box box={box} key={box.name} frequency={this.props.frequency}/>)}
 			</div>
 		)
 	}
@@ -15,7 +15,7 @@ class Boxes extends Component {
 
 const mapStateToProps = (state)=>{
 	return {
-		boxes: state.boxes
+		boxes: state.boxes,
 	}
 }
 

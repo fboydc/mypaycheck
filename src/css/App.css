@@ -561,6 +561,28 @@
 	text-align: center;
 }
 
+.mobile_header {
+	flex-direction: column;
+	justify-content: center;
+}
+
+.hamburger {
+	width: 50px;
+	height: 50px;
+	font-size: 25px;
+	right: 0;
+	background-color: #29335C;
+	color: #FFF;
+
+}
+
+.dropdown-content {
+}
+
+
+.hamburger:hover {
+	cursor: pointer;
+}
 
 @media screen and (max-width: 730px){
 	.box_table {

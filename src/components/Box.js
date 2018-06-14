@@ -12,6 +12,19 @@ export default class Box extends Component {
 		return total;
 	}
 
+	getFrequency = ()=>{
+		const {frequency} = this.props;
+
+		switch(true){
+			case (frequency === 'biweekly'):
+				return .50;
+			case (frequency === 'monthly'):
+				return 1;
+			default:
+				return 1;
+		}
+	}
+
 	render(){
 
 		const length = this.props.box.items.length;
