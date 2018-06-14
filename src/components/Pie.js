@@ -18,17 +18,9 @@ export default class Pie extends Component {
 
 		let pie = d3.pie();
 
-		return(
-			<g>
-				{pie(data).map((value,i)=>{
-					return (
-						<Slice key={i} outerRadius={this.props.radius} value={value} label={value.data} fill={scheme[i]} />
-					)
-				})}
-			</g>
-		)
+		
 
-		/*return(
+		return(
 			<g transform={`translate(${x}, ${y})`}>
 				{pie(data).map((value,i)=>{
 					return (
@@ -36,7 +28,7 @@ export default class Pie extends Component {
 					)
 				})}
 			</g>
-		)*/
+		)
 	}
 
 

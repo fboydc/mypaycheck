@@ -284,6 +284,7 @@
 
 .config_table_container {
 	width: 350px;
+	margin: 20px;
 	margin-bottom: 30px;
 	border-radius: 10px;
 }
@@ -502,7 +503,7 @@
 }
 
 .box_table {
-	margin-bottom: 25px;
+	margin: 25px;
 }
 
 .table {
@@ -536,6 +537,8 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
+	width: 350px;
+	margin-bottom: 70px;
 }
 .pie {
 	height: 250px;
