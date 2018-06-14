@@ -23,8 +23,8 @@ export default class BoxDistribution extends Component {
 		})
 
 		return (
-			<div className="box_distribution col-12 col-sm-12 col-xs-12">
-				<table className="table">
+			<div className="box_distribution col-12 col-sm-8 col-xs-12">
+				<table className="table col-6 col-sm-11 col-xs-11">
 					<tbody>
 						{items.map(item=>{
 							return (
@@ -36,7 +36,7 @@ export default class BoxDistribution extends Component {
 						})}
 					</tbody>
 				</table>
-				<PieContainer roofValue={roofValue} data={data} />
+				<PieContainer roofValue={roofValue} data={data}/>
 			</div>
 		)
 	}

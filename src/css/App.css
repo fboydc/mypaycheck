@@ -522,6 +522,7 @@
 .table tr td {
 	padding: 15px;
 	width: 300px;
+	border: 1px solid #ddd;
 }
 
 .boxes {
@@ -558,6 +559,14 @@
 
 .centered {
 	text-align: center;
+}
+
+
+@media screen and (max-width: 730px){
+	.box_table {
+		margin: 0;
+		margin-bottom: 50px;
+	}
 }
 
 

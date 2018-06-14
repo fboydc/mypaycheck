@@ -24,7 +24,7 @@ export default class PieContainer extends Component {
 		let y= 250/2;
 		const scheme = this.getColorScheme();
 		return(
-			<div className="pie_container">
+			<div className="pie_container col-12 col-sm-8 col-xs-12">
 				<svg className="svg">
 					<Pie x={x} y={y} radius={radius} data={[...this.props.data.map(item=>{
 						return item.value;
