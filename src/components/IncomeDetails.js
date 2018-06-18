@@ -174,9 +174,6 @@ class IncomeDetails extends Component {
 								<button className="button locked" disabled>
 									Save
 								</button>
-								<button className="button clear-button" disabled>
-									Clear
-								</button>
 							</div>
 							<NotificationContainer/>
 						</div>
@@ -232,9 +229,6 @@ class IncomeDetails extends Component {
 						<div className="buttons_container">
 							<button className="button" onClick={this.saveIncomeDetail}>
 								Save
-							</button>
-							<button className="button clear-button">
-								Clear
 							</button>
 						</div>
 						<NotificationContainer/>

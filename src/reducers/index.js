@@ -2,9 +2,12 @@ import { combineReducers } from 'redux';
 import {
 	ADD_INCOME_DETAILS,
 	GET_INCOME_DETAILS,
+	REMOVE_INCOME_DETAILS,
 	ADD_BOX,
+	ADD_BOXES,
 	GET_BOXES,
 	REMOVE_BOX,
+	REMOVE_BOXES,
 	ADD_BOX_ITEM,
 	REMOVE_BOX_ITEM,
 	EDIT_BOX_ITEM
@@ -14,7 +17,6 @@ const incomeDetails = (state = {}, action) => {
 	switch(action.type){
 		case GET_INCOME_DETAILS:{
 			const { annualIncome, filingStatus, frequency, federalAllowances, pretaxDeductions, state, city } = action;
-			console.log("pretaxDeductions", pretaxDeductions);
 			return {
 					annualIncome: annualIncome,
 					filingStatus: filingStatus,
@@ -24,6 +26,9 @@ const incomeDetails = (state = {}, action) => {
 					state: state,
 					city: city
 			}
+		}
+		case REMOVE_INCOME_DETAILS: {
+			return {}
 		}
 		default:
 			return state;
@@ -44,6 +49,23 @@ const boxes = (state = [], action) => {
 
 					]
 		}
+
+		case ADD_BOXES: {
+			const {boxes} = action;
+
+			return [
+				...state,
+				...boxes.map(box=>{
+					return {
+						name: box.name,
+						items: [
+							...box.items
+						]
+					}
+				})
+			]
+		}
+
 		case GET_BOXES:{
 					if(action.boxes){
 						return [...action.boxes]
@@ -54,6 +76,9 @@ const boxes = (state = [], action) => {
 			return state.filter((box)=>box.name != action.name)
 		}
 
+		case REMOVE_BOXES: {
+			return []
+		}
 		case ADD_BOX_ITEM: {
 			const { boxName, name, amount } = action;
 			return state.map((item)=>{

@@ -21,12 +21,14 @@ class Dashboard extends Component {
 	render(){
 		const {incomeDetails, boxes, monthlySalary} = this.props;
 
+		console.log("monthly SALARY", monthlySalary);
+
 		if (Object.keys(incomeDetails).length === 0 || boxes.length === 0){
 			return (
 				<section className="no_data col-offset-3 col-6">
 					<p className="icon"><FaPaperPlane /></p>
-					<p>NO PARAMETERS SET. CLICK HERE TO START:</p>
-					<Link to="/parameters" className="link_btn">PARAMETERS</Link>
+					<p>NO INCOME OR BOXES DATA. CLICK HERE TO START:</p>
+					<Link to="/parameters" className="link_btn">GET STARTED</Link>
 				</section>
 			)
 		}else if(this.props.totalInBoxes.toFixed(2) !== this.props.monthlySalary.toFixed(2)){

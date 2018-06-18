@@ -7,6 +7,8 @@ import FaExclamationCircle from 'react-icons/lib/fa/exclamation-circle';
 import {connect} from 'react-redux';
 import {getBoxes} from '../actions';
 import ReactLoading from 'react-loading';
+import * as demoData from '../lib/demodata';
+import {getIncomeDetails, addBoxes, removeIncomeDetails, removeBoxes} from '../actions';
 
 class Parameters extends Component {
 
@@ -19,8 +21,28 @@ class Parameters extends Component {
 	}
 
 	loadSpinner = () => {
-		console.log("loading spinner");
 		this.setState({loading: !this.state.loading})
+	}
+
+	loadSampleData = () => {
+		this.loadSpinner();
+		setTimeout(()=>{
+			api.addIncomeDetails(demoData.incomeDetails);
+			api.batchBoxes(demoData.boxes);
+
+			this.props.insertDummyData(demoData.incomeDetails, demoData.boxes);
+			this.loadSpinner();
+		}, 2000);
+	}
+
+	wipeData = () =>{
+	this.loadSpinner();
+		setTimeout(()=>{
+			api.removeBoxes();
+			api.removeIncomeDetails();
+			this.props.removeData();
+			this.loadSpinner();
+		}, 2000);
 	}
 
 
@@ -28,7 +50,7 @@ class Parameters extends Component {
 		const { boxes, incomeDetails } = this.props;
 
 
-		console.log("length", Object.keys(incomeDetails).length);
+
 
 		if(this.state.loading){
 			return (<div className="row config_container">
@@ -37,8 +59,9 @@ class Parameters extends Component {
 		}else if(Object.keys(incomeDetails).length === 0){
 			return (
 				<div className="row config_container">
+					<button className="button" onClick={this.loadSampleData}>Use Sample Data?</button>
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
-					<div className="col-offset-1 col-10 col-offset-sm-1 col-sm-12 params-boxes">
+					<div className="col-10 col-sm-10 col-xs-12 params-boxes">
 						<h2>Boxes</h2>
 						<p>Please fill out your income details first.</p>
 					</div>
@@ -47,6 +70,7 @@ class Parameters extends Component {
 		}else if(boxes.length > 0){
 			return(
 				<div className="row config_container">
+					<button className="button" onClick={this.wipeData}>Wipe Data</button>
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
 					<div className="col-10 col-sm-10 col-xs-12 params-boxes">
 						<h2>Boxes</h2>
@@ -58,7 +82,7 @@ class Parameters extends Component {
 			)
 		} else{
 			return(
-				<div>
+				<div className="row config_container">
 					<IncomeDetails loadSpinner={this.loadSpinner}/>
 					<div className="col-10 col-sm-10 col-xs-12 params-boxes">
 						<h2>Boxes</h2>
@@ -79,7 +103,6 @@ class Parameters extends Component {
 
 const mapStateToProps = (state) => {
 
-	//console.log("state in props", state);
 	return {
 		boxes: state.boxes,
 		incomeDetails: state.incomeDetails
@@ -89,7 +112,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getBoxes: (boxes)=>dispatch(getBoxes(boxes))
+		getBoxes: (boxes)=>dispatch(getBoxes(boxes)),
+		insertDummyData: (details, boxes) => {
+			dispatch(getIncomeDetails(details));
+			dispatch(addBoxes(boxes));
+		},
+		removeData: ()=>{
+			dispatch(removeIncomeDetails());
+			dispatch(removeBoxes());
+		}
 	}
 }
 

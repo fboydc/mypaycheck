@@ -49,16 +49,24 @@
 	margin: 0;
 }
 
+.icon_alt {
+	font-size: 3em;
+	margin: 10px;
+}
+
 .link_btn {
 	display: block;
 	padding: 25px;
-	background-color: #2699FB;
+	background-color: #29335C;
 	text-align: center;
 	text-decoration: none;
 	color: #FFF;
 	border-radius: 5px;
 	margin-bottom: 30px;
 }
+
+
+
 
 
 .title {

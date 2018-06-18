@@ -30,7 +30,7 @@ class Navmenu extends Component{
 		})
 	}
 
-	componentDidUnmount(){
+	componentWillUnmount(){
 		window.removeEventListener('resize');
 	}
 

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import IncomeDistribution from './IncomeDistribution';
+import { Link } from 'react-router-dom';
 import Boxes from  './Boxes';
+import FaHandODown from 'react-icons/lib/fa/hand-o-down';
 
 class Cashflow extends Component{
 
@@ -17,13 +19,17 @@ class Cashflow extends Component{
 				<div className="col-offset-3 col-6 title">
 					<h2>Cash Inflow Distribution</h2>
 					<p>No Income Data</p>
+					<FaHandODown className="icon_alt"/>
+					<Link to="/parameters" className="link_btn">GET STARTED</Link>
 				</div>
 			)
 		} else if(!this.props.boxes){
 			return (
-				<div className="col-12 col-sm-12 col-xs-12">
+				<div className="row cashflow_container">
 					<IncomeDistribution incomeDetails={incomeDetails}/>
 					<p>No Boxes registered.</p>
+					<FaHandODown className="icon_alt"/>
+					<Link to="/parameters" className="link_btn">ADD NEW BOXES</Link>
 				</div>
 			)
 		}else {

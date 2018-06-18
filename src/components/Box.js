@@ -47,7 +47,7 @@ export default class Box extends Component {
 									return (
 										<tr key={item.name}>
 											<td>{item.name}</td>
-											<td>{item.amount}</td>
+											<td>{(item.amount * this.getFrequency()).toFixed(2)}</td>
 										</tr>
 									)
 

@@ -8,6 +8,15 @@ const getBoxes = () => {
 
 const addIncomeDetails = (details) => {
 	localStorage.setItem('incomeDetails', JSON.stringify(details));
+	return details;
+}
+
+const removeIncomeDetails = () => {
+	localStorage.removeItem('incomeDetails');
+}
+
+const removeBoxes = () => {
+	localStorage.removeItem('boxes');
 }
 
 const createBox = (name) =>{
@@ -26,6 +35,25 @@ const createBox = (name) =>{
 	return newBox;
 
 }
+
+const batchBoxes = (boxes) =>{
+	boxes.forEach(box=>{
+		const serverBoxes = getBoxes();
+		console.log("server boxes", serverBoxes);
+		if(!serverBoxes || serverBoxes.filter(serverBox => box.name !== serverBox.name))
+			createBox(box.name);
+		const boxItems = box.items;
+
+		boxItems.forEach(item=>{
+			addBoxItem(box.name, item.name, item.amount);
+		})
+
+
+
+	})
+}
+
+
 
 const deleteAllBoxes = () => {
 	localStorage.removeItem('boxes');
@@ -72,8 +100,7 @@ const addBoxItem = (boxName, name, amount) =>{
 }
 
 const deleteBoxItem = (boxName, itemName) =>{
-	console.log("boxName is", boxName);
-	console.log("itemName is", itemName);
+
 	const allBoxes = getBoxes();
 	const filtered = allBoxes.map((item)=>{
 		if(item.name === boxName){
@@ -112,4 +139,4 @@ const editBoxItem = (boxName, itemName, amount) => {
 }
 
 
-export default { getBoxes, getIncomeDetails, createBox, deleteAllBoxes, addIncomeDetails, deleteBox, addBoxItem, deleteBoxItem, editBoxItem}
+export default { getBoxes, getIncomeDetails, createBox, deleteAllBoxes, addIncomeDetails, deleteBox, addBoxItem, deleteBoxItem, editBoxItem, batchBoxes, removeIncomeDetails, removeBoxes}

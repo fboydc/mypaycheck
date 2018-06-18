@@ -1,7 +1,10 @@
 export const ADD_INCOME_DETAILS = 'ADD_INCOME_DETAILS'
 export const GET_INCOME_DETAILS = 'GET_INCOME_DETAILS'
+export const REMOVE_INCOME_DETAILS = 'REMOVE_INCOME_DETAILS'
 export const ADD_BOX = 'ADD_BOX'
+export const ADD_BOXES = 'ADD_BOXES'
 export const GET_BOXES = 'GET_BOXES'
+export const REMOVE_BOXES = 'REMOVE_BOXES'
 export const REMOVE_BOX = 'REMOVE_BOX'
 export const ADD_BOX_ITEM = 'ADD_BOX_ITEM'
 export const REMOVE_BOX_ITEM = 'REMOVE_BOX_ITEM'
@@ -39,12 +42,31 @@ export const getIncomeDetails = ({annualIncome, filingStatus, frequency, federal
 	}
 }
 
+export const removeIncomeDetails = ()=> {
+	return {
+		type: REMOVE_INCOME_DETAILS
+	}
+}
+
 
 export const addBox = ({name, items}) => {
 	return {
 		type: ADD_BOX,
 		name,
 		items
+	}
+}
+
+export const addBoxes = (boxes) => {
+	return {
+		type: ADD_BOXES,
+		boxes
+	}
+}
+
+export const removeBoxes = ()=>{
+	return {
+		type: REMOVE_BOXES
 	}
 }
 
